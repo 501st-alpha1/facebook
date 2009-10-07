@@ -30,13 +30,8 @@
 ;;   51 Franklin Street, Fifth Floor
 ;;   Boston, MA 02110-1301
 ;;   USA     
-;;; Commentary:
 
-;;;   Version 2.0
-;;;   facebook-status replaces facbeook-set-status
-;;;   Lots of good patches from Rudi Schlatte.  Facebook-el works on 
-;;;   my plain vanilla ubuntu box and on my mac.  Please let me know if you 
-;;;   have issues.
+;;; Commentary:
 
 ;;;   First pass at interfacing with facebook.  You must add the "developers 
 ;;;   app" and get your own application api-key and application secret key to 
@@ -93,7 +88,8 @@
                            (if (null (assoc-default 'expires facebook-session-info))
 			       0
 			     (assoc-default 'expires facebook-session-info))
-			   )))
+			   ))
+		   (not (string= method-name "auth.createToken")))
               (assoc-default 'secret facebook-session-info)
             facebook-api-secret))
          (sig-full-args `(("sig" . ,(facebook-create-sig sorted-full-args secret))
